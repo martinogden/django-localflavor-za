@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 from django.core.validators import EMPTY_VALUES
 from django.forms import ValidationError
-from django.forms.fields import CharField, RegexField
+from django.forms.fields import CharField, RegexField, Select
 from django.utils.checksums import luhn
 from django.utils.translation import gettext as _
 import re
@@ -59,3 +59,11 @@ class ZAPostCodeField(RegexField):
     def __init__(self, max_length=None, min_length=None, *args, **kwargs):
         super(ZAPostCodeField, self).__init__(r'^\d{4}$',
             max_length, min_length, *args, **kwargs)
+
+class ZAProvinceSelect(Select):
+    """
+    A Select widget that uses a list of South African Provinces as its choices.
+    """
+    def __init__(self, attrs=None):
+        from za_provinces import PROVINCE_CHOICES
+        super(ZAProvinceSelect, self).__init__(attrs, choices=PROVINCE_CHOICES)

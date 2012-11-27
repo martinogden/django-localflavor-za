@@ -14,6 +14,9 @@ What's in the South Africa localflavor?
 * forms.ZAPostCodeField: A form field that validates input as a South African
   postcode. Valid postcodes must have four digits.
 
+* forms.ZAProvinceSelect: A Select widget that uses a list of South African
+  provinces and territories as its choices.
+
 See the source code for full details.
 
 About localflavors

@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
-from django.contrib.localflavor.za.forms import ZAIDField, ZAPostCodeField
+from django.contrib.localflavor.za.forms import (ZAIDField,
+        ZAPostCodeField, ZAProvinceSelect)
 
 from django.test import SimpleTestCase
 
@@ -29,3 +30,18 @@ class ZALocalFlavorTests(SimpleTestCase):
             ' 7530': error_invalid,
         }
         self.assertFieldOutput(ZAPostCodeField, valid, invalid)
+
+    def test_ZAProvinceSelect(self):
+        f = ZAProvinceSelect()
+        out = '''<select name="province">
+<option value="EC" selected="selected">Eastern Cape</option>
+<option value="FS">Free State</option>
+<option value="GP">Gauteng</option>
+<option value="KN">KwaZulu-Natal</option>
+<option value="LP">Limpopo</option>
+<option value="MP">Mpumalanga</option>
+<option value="NC">Northern Cape</option>
+<option value="NW">North West</option>
+<option value="WC">Western Cape</option>
+</select>'''
+        self.assertHTMLEqual(f.render('province', 'EC'), out)
